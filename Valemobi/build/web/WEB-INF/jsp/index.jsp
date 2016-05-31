@@ -1,10 +1,17 @@
+<%@page import="Controller.Controller"%>
+<%@page import="java.util.Random"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
     <head>
-
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
@@ -24,18 +31,24 @@
     </head>
 
     <body>
-        
-       
-       <div class="row">
+
+        <%
+            Random rand = new Random();
+            int randomNum = rand.nextInt(100000) + 1;
+
+
+        %>       
+
+        <div class="row">
             <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                <form id="form1" role="form" action="resp-cadastro.jsp" method="Post">
+                <form action="${pageContext.request.contextPath}/redirect.htm?page=resp-cadastro" method="post">
                     <h2>Cadastro de Mercadorias</h2>
                     <hr class="colorgraph">
                     <div class="row">
-                         
+
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
-                                <input type="text" name="id_operacao" id="id_operacao" class="form-control input-lg" placeholder="Codigo da Operação" tabindex="1" required maxlength="5" pattern="[0-9]{5}">
+                                <input type="text" name="id_operacao" id="id_operacao" class="form-control input-lg" value="<%out.print(randomNum);%>" tabindex="1" maxlength="5" disabled>
                                 <!-- No campo Nome foi colocado apenas um atributo required. Isso é padrão do HTML5 e a lib
                                 usa automaticamente para formatar o visual de erro.-->
                             </div>
@@ -64,7 +77,7 @@
                         <input type="text" name="quantidade" id="quantidade" class="form-control input-lg" placeholder="Quantidade" tabindex="4" required required maxlength="5" pattern="[0-9]{5}">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="preco" id="preco" class="form-control input-lg" placeholder="Preço" tabindex="4" maxlength="5" pattern="[0-9]{5}">
+                        <input type="text" name="preco" id="preco" class="form-control input-lg" placeholder="Preço" tabindex="4" maxlength="5" pattern="[0-9]{2}[.]{1}[0-9]{2}">
                     </div>
                     <div class="form-group">
                         <input type="text" name="tipo_negocio" id="tipo_negocio" class="form-control input-lg" placeholder="Compra ou Venda?" tabindex="4">
@@ -80,7 +93,9 @@
 
                     </div>     
                 </form>
-          </div>
-        
+            </div>
+                                
+                                
+      
     </body>
 </html>

@@ -5,34 +5,70 @@
  */
 package Controller;
 
-import DAO.OperacaoDAO;
-import Objects.Operacao;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.net.BindException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
  * @author Administrador
  */
 public class Controller {
-  @RequestMapping("novaOperacao")
-  public String form() {
-    return "Operacao/formulario";
-  }
-  @RequestMapping("adicionaTarefa")
-public String adiciona(Operacao oper){
-   OperacaoDAO dao;      
-      try {
-          dao = new OperacaoDAO();
-          dao.inserir(oper);
-      } catch (SQLException ex) {
-          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-      } catch (ClassNotFoundException ex) {
-          Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
-      }
-  return "Operacao/adicionada";
-}
+  
+    /**
+      * search controller
+      * @param request
+      * @param response
+      * @return
+      * @throws Exception 
+      */
+    
+    @RequestMapping("search")
+    protected ModelAndView search(
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {  
+            //product do search
+            String search = request.getParameter("q");
+            ModelAndView mv = new ModelAndView("search");
+            return mv;
+    }
+    
+     /**
+      * Redirect with request and response
+      * @param request
+      * @param response
+      * @return
+      * @throws Exception 
+      */
+    @RequestMapping("redirect")
+    protected ModelAndView handleRequestInternal(
+            HttpServletRequest request,
+            HttpServletResponse response) throws Exception {  
+            // String que recebe a pagina para a qual redirecionaremos a requisição
+            String redirectUrl = request.getParameter("page");
+            ModelAndView mv = new ModelAndView(redirectUrl);
+            return mv;
+    }
+    
+    /**
+     * Redirect with request response and object received by forms using spring
+     * bind.
+     * @param request
+     * @param response
+     * @param command
+     * @param errors
+     * @return
+     * @throws Exception 
+     */
+     protected ModelAndView handleRequestInternal(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object command, 
+            BindException errors) throws Exception {
+            ModelAndView mv = new ModelAndView("");
+            return mv;
+    }
   
 }

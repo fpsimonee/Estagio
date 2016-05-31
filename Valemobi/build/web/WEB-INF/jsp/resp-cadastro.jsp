@@ -4,6 +4,7 @@
     Author     : Administrador
 --%>
 
+<%@page import="java.util.Random"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="Objects.Operacao"%>
 <%@page import="DAO.OperacaoDAO"%>
@@ -15,21 +16,29 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:useBean id="obj" class="OperacaoDAO"> 
-        <jsp:useBean id="novo" class="Operacao"> 
-        <%
-//            Conta obj = new Conta();
-//            obj.setLogin(request.getParameter("login"));
-//            obj.setSenha(request.getParameter("senha1"));
-            
-            try {
-                //ContaDAO banco = new ContaDAO();
-                obj.inserir(novo);
-            } catch (SQLException e) {
-                out.print("Falha no Cadastro");
-                System.exit(1);
-            }
-            out.print("Cadastro Efetuado");            
-        %>
+     <%
+             
+                 String id_operacao = request.getParameter("id_operacao");
+                 String id_mercadoria = request.getParameter("id_mercadoria");
+                 String tipo_mercadoria = request.getParameter("tipo_mercadoria");
+                 String nome_mercadoria = request.getParameter("nome_mercadoria");
+                 String quantidade = request.getParameter("quantidade");
+                 String preco = request.getParameter("preco");
+                 String tipo_operacao = request.getParameter("tipo_operacao");
+             
+    %>      
+             <h2>Consulta do Item</h2>   
+            <ul class="list-group">
+                <li class="list-group-item">Id Operacao: <%out.println(id_operacao);%></li>
+                <li class="list-group-item">Id Mercadoria: <%out.println(id_mercadoria);%></li>
+                <li class="list-group-item">Nome: <%out.println(nome_mercadoria);%></li>
+                <li class="list-group-item">Categoria: <%out.println(tipo_mercadoria);%></li>
+                <li class="list-group-item">Quantidade: <%out.println(quantidade);%></li>
+                <li class="list-group-item">Preco: <%out.println(preco);%></li>
+                <li class="list-group-item">Tipo Operacao: <%out.println(tipo_operacao);%></li>
+              </ul>  
+              
+              
+         </div>        
     </body>
 </html>
